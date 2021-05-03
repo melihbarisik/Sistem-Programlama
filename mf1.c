@@ -79,6 +79,56 @@ void okuVeYerlestir(JRB b, JRB bn,IS is, char* opsiyon)
   }
 }
 
+
+void encode(JRB b, char* girisDosyasi, JRB bn, FILE* fp)
+{
+   
+   IS is;
+   int i,j;
+   
+   is = new_inputstruct(girisDosyasi);
+   
+   
+     while (get_line(is) >= 0) 
+     {
+        for(i=0; i<is->NF; i++)
+        { 
+          JRB c;
+          printf("%s \n",is->fields[i]);
+          c= jrb_find_str(b,is->fields[i]);
+  
+          if(c==NULL) printf("degerimiz null \n");
+          else fprintf(fp,"%s ", c->val.s);  
+        }
+        
+     }
+}
+
+void decode(JRB b, char* girisDosyasi, JRB bn, FILE* fp)
+{
+   IS is;
+   int i,j;
+   
+   is = new_inputstruct(girisDosyasi);
+   
+   
+     while (get_line(is) >= 0) 
+     {
+        for(i=0; i<is->NF; i++)
+        { 
+          JRB c;
+          printf("%s \n",is->fields[i]);
+          c= jrb_find_str(b,is->fields[i]);
+  
+          if(c==NULL) printf("degerimiz null \n");
+          else fprintf(fp,"%s ", c->val.s);  
+        }
+        
+     }
+
+}
+
+
 int main(int argc, char **argv)
 {
   return 0; 
