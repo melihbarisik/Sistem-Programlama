@@ -3,9 +3,9 @@
 
 ## Installation
 Git ile programı indirip kullanabilirsiniz [git](https://git-scm.com/)
-'''bash
+```bash
 git clone https://github.com/melihbarisik/Sistem-Programlama.git
-'''
+```
 
 ## Usage
 Programda kullanilan libfdr kutuphanesi ayri bir dosyada bulunmaktadir.
@@ -16,10 +16,10 @@ Program formati ./program -e/d girisDosyasi cikisDosyasi seklindedir. Oncelikle 
 Daha sonra sirasi ile giris ve cikis dosyalarinin adlari verilmelidir. 
 Uygun olmayan giris sekilleri, var olmayan dosya giris denemeleri programin nerede hata yaptiginizla ilgili mesaj yazdirip   kapanmasi ile sonuclanacaktir.
 
-'''bash
+```bash
 ./kripto -e file encrypted #şifreleme işlemi
 ./kripto -d file decrypted #şifre çözme işlemi
-'''
+```
 
 ## Authors
 Emre Akcan, Melih Ensar Barışık, Ömer Can Çalışır, Emine Karakayalı
