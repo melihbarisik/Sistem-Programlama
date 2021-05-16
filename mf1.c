@@ -4,55 +4,13 @@
 #include "libfdr/jrb.h"
 #include <string.h>
 #include "libfdr/jval.h"
-#define GIRISDOSYASIKELIMESAYISI 500
-#define MAXKARAKTERSAYISI 100
 
-//Ödevde işlenen kelime, kod uzunluğununu kontrol eden metod.
-void karakterUzunluguKontrol(char* kelime)
-{
-  int i=0;
-  int karakterSayisi=0;
- 
-  while(kelime[i] != '\0') // Kelimenin sonuna gelene kadar dönüyor.
-  {
-    if(kelime[i] != '"' && kelime[i] !=':' && kelime[i]!= ',') //Kelimedeki json formatları göz ardı ediliyor.
-    {
-      karakterSayisi++; //Karakter sayısı arttırılıyor.
-    }
-    i++;
-  }
- 
-  if(karakterSayisi > MAXKARAKTERSAYISI)
-  { 
-    printf("Value: %s\n",kelime);
-    printf("Kelime veya kod en fazla 100 karakterden oluşmalıdır.\n");
-    exit(0);
-  }
-}
-
-void girisDosyasiKelimeSayisiKontrol(char* girisDosyasi)
-{
-  IS is = new_inputstruct(girisDosyasi);
-  int toplamKelimeSayisi=0;
- 
-  while(get_line(is) >= 0)
-  { 
-    toplamKelimeSayisi = toplamKelimeSayisi + is->NF;
-  }
-  if(toplamKelimeSayisi > GIRISDOSYASIKELIMESAYISI) 
-  {
-    printf("Giris dosyasi kelime sayisi 500 kelimeden az olmalıdır. \n	");
-    jettison_inputstruct(is);
-    exit(0);
-  }	
-    jettison_inputstruct(is);
-}
 
 //Kilit dosyasinin varligi kontrol ediliyor.
-void dosyaKontrolleri(IS is, char* girisDosyasi)
+void dosyaKontrolleri(IS is)
 {
    if(is == NULL) { printf(".kilit Dosyası Bulunamadı. \n"); exit(0);}
-   girisDosyasiKelimeSayisiKontrol(girisDosyasi);
+   
 }
 
 void parametreKontrol(int argc, char** argv)
@@ -88,7 +46,7 @@ void parametreKontrol(int argc, char** argv)
 //Gelen kelime ve kodlar json formatından temizleniyor
 char* ayikla(char* kelime)
 {
-   karakterUzunluguKontrol(kelime);
+  
    
    char* kelimeSon;
    char* mallocKelime = malloc(25 * sizeof(char*));
@@ -257,7 +215,7 @@ int main(int argc, char **argv)
   b = make_jrb();
   
  
-  dosyaKontrolleri(is, girisDosyasi);
+  dosyaKontrolleri(is);
   islemiBaslat(b, bn, is, argvParametre,cikisDosyasi,girisDosyasi);
   jettison_inputstruct(is);
   return 0;
